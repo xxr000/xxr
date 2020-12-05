@@ -1,0 +1,89 @@
+if v:lang =~ "utf8$" || v:lang =~ "UTF-8$"
+   set fileencodings=ucs-bom,utf-8,latin1
+endif
+
+set nocompatible " Use Vim defaults (much better!)
+set bs=indent,eol,start  " allow backspacing over everything in insert mode
+set ai   " always set autoindenting on
+"set backup  " keep a backup file
+set viminfo='20,\"200 " read/write a .viminfo file, don't store more
+   " than 50 lines of registers
+set history=200  " keep 50 lines of command line history
+set ruler  " show the cursor position all the time
+
+if has("cscope") && filereadable("/usr/bin/cscope")
+   set csprg=/bin/cscope
+   set csto=0
+   set cst
+   set nocsverb
+   " add any database in current directory
+   if filereadable("cscope.out")
+      cs add $PWD/cscope.out
+   " else add database pointed to by environment
+   elseif $CSCOPE_DB != ""
+      cs add $CSCOPE_DB
+   endif
+   set csverb
+endif
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+filetype on
+filetype plugin on
+filetype indent on
+
+if &term=="xterm"
+     set t_Co=8
+     set t_Sb=[4%dm
+     set t_Sf=[3%dm
+endif
+
+" Don't wake up system with blinking cursor:
+" http://www.linuxpowertop.org/known.php
+let &guicursor = &guicursor . ",a:blinkon0"
+
+set nu
+set cursorline
+syntax on
+set tabstop=4
+set smarttab
+set shiftwidth=4
+set autoindent
+set mouse=a
+"set gfn=Courier\ 10\ Pitch\ 16
+"au BufRead,BufNewFile *.sv  set filetype=systemverilog
+"au BufRead,BufNewFile *.v  set filetype=systemverilog
+"au BufRead,BufNewFile *.svi  set filetype=systemverilog
+"au BufRead,BufNewFile *.svh  set filetype=systemverilog
+set guifont=Monospace\ Regular\ 13
+"set background=dark
+"colorscheme koehler
+"colorscheme desert
+colorscheme molokai
+set backup
+function Bkdir()
+    let $BKODIR=expand("$HOME/.vim/backup")
+    let $RUNTIMEPATH=expand("%:p:h")
+    let $BKDIR=$BKODIR.$RUNTIMEPATH
+    if !isdirectory(expand("$BKDIR"))
+        call mkdir(expand("$BKDIR"),"p",0750)
+    endif
+endfunction
+au BufWrite * call Bkdir()
+autocmd BufWritePre * let &bex = '_'.strftime("%Y%m%d_%H_%M")
+let &backupdir=expand("$HOME/.vim/backup").expand("%:p:h")
+let g:molokai_original = 1
+let g:rehash256 = 1
+function! CleverTab()
+        if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+                return "\<Tab>"
+        else
+                return "\<C-N>"
+        endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
