@@ -1,0 +1,36 @@
+[user]
+ email = xuxinran@huami.com
+ name = xinr
+[push]
+ default = matching
+[difftool]
+ prompt = false
+[alias]
+    dlist = diff origin/master --stat
+    dfile = difftool origin/master --
+    last = log -3 origin/master
+    d = difftool
+    co = checkout
+    ci = commit
+    st = status -uno
+[color]
+branch = auto
+diff = auto
+status = auto
+[color "branch"]
+current = yellow reverse
+local = yellow 
+remote = green
+[color "diff"]
+meta = blue
+frag = magenta bold
+old = red
+new = green
+[color "status"]
+added = yellow
+changed = green
+untracked = cyan
+[diff]
+ tool = gvimdiff
+[core]
+ editor = gvim
