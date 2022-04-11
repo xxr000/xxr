@@ -1,96 +1,12 @@
-#synopsys
-setenv SYNOPSYS /tools/synopsys
-
-#--------------------------------------------------------
-#VCS
-#--------------------------------------------------------
-#vcs 2018
-setenv VCS_HOME ${SYNOPSYS}/vcs-mx/vcs/O-2018.09-SP2
-setenv DVE_HOME ${VCS_HOME}/gui/dve
-setenv PATH ${PATH}:${DVE_HOME}/bin:${VCS_HOME}/bin
-
-#--------------------------------------------------------
-#VERDI
-#--------------------------------------------------------
-#verdi
-setenv VERDI_HOME ${SYNOPSYS}/verdi/verdi/Verdi_O-2018.09-SP2
-setenv NOVAS_HOME ${SYNOPSYS}/verdi/verdi/Verdi_O-2018.09-SP2
-setenv FSDB_HOME ${VERDI_HOME}/share/PLI/VCS/LINUX64
-setenv PATH ${PATH}:${VERDI_HOME}/bin:${VERDI_HOME}/platform/LINUX64/bin
-setenv LD_LIBRARY_PATH ${NOVAS_HOME}/share/PLI/VCS/LINUX64
-
-#--------------------------------------------------------
-#DC
-#--------------------------------------------------------
-#dc
-setenv DC_HOME /tools/synopsys/dc/syn/O-2018.06-SP1
-setenv PATH ${PATH}:${DC_HOME}/bin
-alias dc 'dc_shell &'
-alias dv 'design_vision &'
-alias dt 'dc_shell-t &'
-
-#--------------------------------------------------------
-#ICC
-#--------------------------------------------------------
-#icc
-setenv ICC_HOME /tools/synopsys/icc/icc/O-2018.06-SP1
-setenv PATH ${PATH}:${ICC_HOME}/bin
-
-#--------------------------------------------------------
-#Prime time
-#--------------------------------------------------------
-#pt
-setenv PT_HOME /tools/synopsys/pt/pts/O-2018.06-SP1
-setenv PATH ${PATH}:${PT_HOME}/bin
-alias pt 'primetime &'
-
-#--------------------------------------------------------
-#Formality
-#--------------------------------------------------------
-#fm
-setenv FM_HOME /tools/synopsys/fm/fm/O-2018.06-SP1
-setenv PATH ${PATH}:${FM_HOME}/bin
-alias fm 'fm_shell &'
-
-#--------------------------------------------------------
-#Hspice
-#--------------------------------------------------------
-#hspice
-setenv HSPICE_HOME /tools/synopsys/hspice/hspice/O-2018.09-SP2/hspice
-setenv PATH ${PATH}:${HSPICE_HOME}/bin
-
-#--------------------------------------------------------
-#StartRC
-#--------------------------------------------------------
-#starrc
-setenv STA_HOME /tools/synopsys/startrc/starrc/O-2018.06-SP1
-setenv PATH ${PATH}:${STA_HOME}/bin
-
-#--------------------------------------------------------
-#License
-#--------------------------------------------------------
-#scl
-setenv PATH "/tools/synopsys/scl/scl/2018.06/linux64/bin":${PATH}
-#license
-setenv SNOSLMD_LICENSE_FILE 27000@${HOSTNAME}
-setenv LM_LICENSE_FILE 27000@${HOSTNAME}
-setenv VCS_ARCH_OVERRIDE linux
-setenv VCS_TARGET_ARCH amd64
-#app
-
-lmgrd -c /tools/synopsys/license/Synopsys.dat  > &/dev/null
-
-setenv PATH ${PATH}:/usr/local/git/bin
-
 set cr = "%{\e[31m%}" 
 set cg = "%{\e[32m%}" 
 set c0 = "%{\e[0m%}" 
-if ( $?prompt ) then                                #如果$prompt变量尚未设置，则做如下设置
-     if ( "$uid" == "0" ) then                      #判断用户的uid
-         set prompt = "$cr%U%n%u@%m $c0%B%~%b # "    #对于root，我们显示“#”号
-     else
-         set prompt = "$cr%U%n%u@%m $c0%B%~%b % "    #对于普通用户，显示“%”号。
-     endif
+if ( $?prompt ) then
+	if ( "$uid" == "0" ) then
+		set prompt = "$cr%U%n%u@%m $c0%B%~%b # "
+	else
+		set prompt = "$cr%U%n%u@%m $c0%B%~%b % "
+	endif
 endif
 setenv LSCOLORS ExGxFxdxCxegedabagExEx
 setenv CLICOLOR yes
@@ -99,9 +15,13 @@ set autolist
 set autoexpand
 
 #usr define
+alias cd 'cd \!*'
 alias g 'gvim'
 alias .. 'cd ..'
 alias cc 'cp -rf'
 alias del 'rm -r'
-alias ll 'ls -la '
-alias lo 'ls -l '
+alias ll 'ls -l '
+alias la 'ls -la '
+alias ref 'cd -;
+alias h 'history;'
+alias so 'source ~/.cshrc;'
