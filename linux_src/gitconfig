@@ -6,16 +6,21 @@
 [difftool]
     prompt = false
 [alias]
-    dlist = diff origin/master --stat
-    dfile = difftool origin/master --
-    last = log -3 origin/master
-    d = difftool
-    co = checkout
+    amend = commit --amend
+    amendf = commit --amend --no-edit
+    br = branch
     ci = commit
-    st = status -uno
-    b = branch
-    l = log --stat
+    co = checkout
+    cp = cherry-pick
+    df = diff
+    ds = diff --staged
+    ls = log --stat
     lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    lp = log --pretty=oneline
+    sa = stash apply
+    sh = show
+    ss = stash save
+    st = status
 [color]
     ui = auto
 [color "branch"]
