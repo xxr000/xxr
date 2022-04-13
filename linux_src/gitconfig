@@ -15,7 +15,7 @@
     df = diff
     ds = diff --staged
     ls = log --stat
-    lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(bold white)— %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
+    lg = log --graph --all --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(black)%s%C(reset) %C(bold cyan)- %an%C(reset)%C(bold yellow)%d%C(reset)' --abbrev-commit --date=relative
     lp = log --pretty=oneline
     sa = stash apply
     sh = show
@@ -34,7 +34,7 @@
 [color "diff"]
     meta = yellow
     frag = magenta bold
-    commit = yellow bold
+    commit = cyan bold
     old = red bold
     new = green bold
     whitespace = red reverse
