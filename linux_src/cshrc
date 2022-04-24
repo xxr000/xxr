@@ -10,11 +10,11 @@ if ( $?prompt ) then
 endif
 setenv LSCOLORS ExGxFxdxCxegedabagExEx
 setenv CLICOLOR yes
-setenv GREP_OPTIONS --color=auto
 set autolist
 set autoexpand
 
 #usr define
+alias grep 'grep --color=auto '
 alias cd 'cd \!*'
 alias g 'gvim'
 alias .. 'cd ..'
